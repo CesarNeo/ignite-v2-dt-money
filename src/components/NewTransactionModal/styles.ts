@@ -62,4 +62,14 @@ export const Content = styled(Dialog.Content)`
     }
   }
 `
-export const CloseButton = styled(Dialog.Close)``
+export const CloseButton = styled(Dialog.Close)`
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  line-height: 0;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: ${({ theme }) => theme['gray-500']};
+`
