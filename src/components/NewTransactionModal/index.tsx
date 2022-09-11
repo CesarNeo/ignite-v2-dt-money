@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import * as zod from 'zod'
 
 import {
@@ -16,13 +16,14 @@ const newTransactionFormSchema = zod.object({
   description: zod.string(),
   price: zod.number(),
   category: zod.string(),
-  // type: zod.enum(['income', 'outcome']),
+  type: zod.enum(['income', 'outcome']),
 })
 
 type NewTransactionsFormInputs = zod.infer<typeof newTransactionFormSchema>
 
 export function NewTransactionModal() {
   const {
+    control,
     register,
     handleSubmit,
     formState: { isSubmitting },
@@ -64,17 +65,23 @@ export function NewTransactionModal() {
             {...register('category')}
           />
 
-          <TransactionType>
-            <TransactionTypeButton variant="income" value="income">
-              <ArrowCircleUp size={24} />
-              Entrada
-            </TransactionTypeButton>
+          <Controller
+            control={control}
+            name="type"
+            render={({ field: { onChange, value } }) => (
+              <TransactionType onValueChange={onChange} value={value}>
+                <TransactionTypeButton variant="income" value="income">
+                  <ArrowCircleUp size={24} />
+                  Entrada
+                </TransactionTypeButton>
 
-            <TransactionTypeButton variant="outcome" value="outcome">
-              <ArrowCircleDown size={24} />
-              Saída
-            </TransactionTypeButton>
-          </TransactionType>
+                <TransactionTypeButton variant="outcome" value="outcome">
+                  <ArrowCircleDown size={24} />
+                  Saída
+                </TransactionTypeButton>
+              </TransactionType>
+            )}
+          />
 
           <button type="submit" disabled={isSubmitting}>
             Cadastrar
