@@ -39,6 +39,14 @@
       "type": "outcome",
       "createdAt": "2022-09-11T16:21:50.480Z",
       "id": 5
+    },
+    {
+      "description": "Compra",
+      "price": 800,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2022-09-19T21:03:42.410Z",
+      "id": 6
     }
   ]
 }
